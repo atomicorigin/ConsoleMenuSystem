@@ -33,47 +33,62 @@ The `Menu` class provides the following properties and methods:
 The following example demonstrates how to create and display a simple menu:
 
 ```csharp
+// Import the MenuSystem library
 using MenuSystem;
 
+// Set running to true
 bool running = true;
 
+// Set current menu to 1
 int curMenu = 1;
 
+// Start a loop while running is true
 while (running) {
+
+    // Use switch statement to select which menu to display
     switch (curMenu) {
         case 1:
-            MainMenu();
+            MainMenu(); // Display main menu
             break;
         case 2:
-            SecondMenu();
+            SecondMenu(); // Display second menu
             break;
         case 0:
-            running = false;
-            System.Console.Clear();
+            running = false; // Stop running if user quits
+            System.Console.Clear(); // Clear the console
             break;
     }
 }
 
+// Define MainMenu function
 void MainMenu() {
+
+    // Create a new menu object with title "Main Menu" and options
     Menu main = new("Main Menu") {
-        { 'h', "Hello World"},
-        { '2', "Goto Second Menu"},
-        { 'q', "Quit Program"},
+        { 'h', "Hello World"}, // Option to display "Hello World"
+        { '2', "Goto Second Menu"}, // Option to go to second menu
+        { 'q', "Quit Program"}, // Option to quit program
     };
+
+    // Use try-catch to handle any invalid input
     try {
+        // Display the menu and get the user's selection
         char Selection = main.DisplayMenu(true);
+
+        // Respond to the user's selection
         if (Selection.Equals('h')) {
-            System.Console.Clear();
-            System.Console.WriteLine("Hello World!");
-            System.Console.WriteLine();
-            System.Console.Write("Press Any Key to Continue ...");
-            System.Console.ReadKey();
+            System.Console.Clear(); // Clear the console
+            System.Console.WriteLine("Hello World!"); // Display "Hello World"
+            System.Console.WriteLine(); // Print a blank line
+            System.Console.Write("Press Any Key to Continue ..."); // Prompt user to press a key
+            System.Console.ReadKey(); // Wait for user to press a key
         } else if (Selection.Equals('2')) {
-            curMenu = 2;
+            curMenu = 2; // Go to second menu
         } else if (Selection.Equals('q')) {
-            curMenu = 0;
+            curMenu = 0; // Quit program
         }
     } catch (InvalidMenuSelectionException) {
+        // Handle any invalid input by displaying an error message
         System.Console.Clear();
         System.Console.WriteLine("You have made an invalid selection!");
         System.Console.WriteLine("Please make a selection from the options shown.");
@@ -83,30 +98,39 @@ void MainMenu() {
     }
 }
 
+// Define SecondMenu function
 void SecondMenu() {
+
+    // Create a new menu object with title "Second Menu" and options
     Menu main = new("Second Menu") {
-        {'d', "Display Message"},
-        {'b', "Go Back to Main Menu"},
-        {'q', "Quit Program"},
+        {'d', "Display Message"}, // Option to display a message
+        {'b', "Go Back to Main Menu"}, // Option to go back to main menu
+        {'q', "Quit Program"}, // Option to quit program
     };
+
+    // Use try-catch to handle any invalid input
     try {
+        // Display the menu and get the user's selection
         char Selection = main.DisplayMenu(true);
+
+        // Respond to the user's selection
         if (Selection.Equals('d')) {
-            System.Console.Clear();
-            System.Console.WriteLine("Hello awesome person!!!");
-            System.Console.WriteLine();
+            System.Console.Clear(); // Clear the console
+            System.Console.WriteLine("Hello awesome person!!!"); // Display a message
+            System.Console.WriteLine(); // Print a blank line
             System.Console.WriteLine("Press Any Key to Continue ... ");
-            Console.ReadKey();
+            Console.ReadKey(); // Wait for user to press a key
         } else if (Selection.Equals('b')) {
-            curMenu = 1;
+            curMenu = 1; // Go back to main menu
         } else if (Selection.Equals('q')) {
-            curMenu = 0;
+            curMenu = 0; // Quit program
         }
     } catch (InvalidMenuSelectionException) {
+        // Handle any invalid input by displaying an error message
         System.Console.Clear();
         System.Console.WriteLine("You have made an invalid selection!");
         System.Console.WriteLine("Please make a selection from the options shown.");
-        System.Console.WriteLine();
+        System.Console.Write();
         System.Console.WriteLine("Press Any Key to Continue ... ");
         System.Console.ReadKey();
     }
