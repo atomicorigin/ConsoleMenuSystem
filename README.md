@@ -118,7 +118,7 @@ void SecondMenu() {
             System.Console.Clear(); // Clear the console
             System.Console.WriteLine("Hello awesome person!!!"); // Display a message
             System.Console.WriteLine(); // Print a blank line
-            System.Console.WriteLine("Press Any Key to Continue ... ");
+            System.Console.Write("Press Any Key to Continue ... ");
             Console.ReadKey(); // Wait for user to press a key
         } else if (Selection.Equals('b')) {
             curMenu = 1; // Go back to main menu
@@ -130,8 +130,8 @@ void SecondMenu() {
         System.Console.Clear();
         System.Console.WriteLine("You have made an invalid selection!");
         System.Console.WriteLine("Please make a selection from the options shown.");
-        System.Console.Write();
-        System.Console.WriteLine("Press Any Key to Continue ... ");
+        System.Console.WriteLine();
+        System.Console.Write("Press Any Key to Continue ... ");
         System.Console.ReadKey();
     }
 }
