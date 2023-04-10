@@ -31,7 +31,7 @@ namespace MenuSystem
         public Menu(string Title, string Prompt, bool PadPrompt = false)
         {
             this.Title = Title;
-            Prompt = PadPrompt ? $"{Prompt}: " : Prompt;
+            this.Prompt = PadPrompt ? $"{Prompt}: " : Prompt;
             _menuItems = new();
         }
 
@@ -101,11 +101,11 @@ namespace MenuSystem
             System.Console.WriteLine();
             foreach (KeyValuePair<char, string> MenuItem in _menuItems)
             {
-                System.Console.WriteLine(MenuItem.ToString());
+                System.Console.WriteLine($"{MenuItem.Key}: {MenuItem.Value}");
             }
             System.Console.WriteLine(Line);
             System.Console.Write(Prompt);
-            ConsoleKeyInfo SelectedKey = Console.ReadKey();
+            ConsoleKeyInfo SelectedKey = Console.ReadKey(true);
             if (_menuItems.ContainsKey(SelectedKey.KeyChar))
             {
                 return SelectedKey.KeyChar;
