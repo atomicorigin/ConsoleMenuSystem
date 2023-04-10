@@ -33,40 +33,95 @@ The `Menu` class provides the following properties and methods:
 The following example demonstrates how to create and display a simple menu:
 
 ```csharp
+using MenuSystem;
+
+bool running = true;
+
 int curMenu = 1;
 
-while (true) {
-    if (curMenu == 1) {
-        MainMenu();
-    } else if (curMenu == 0) {
-        break;
+while (running) {
+    switch (curMenu) {
+        case 1:
+            MainMenu();
+            break;
+        case 2:
+            SecondMenu();
+            break;
+        case 0:
+            running = false;
+            System.Console.Clear();
+            break;
     }
 }
 
 void MainMenu() {
-    Menu main = new Menu("Main Menu") {
-        { 'h', "Hello World" },
-        { 'q', "Quit Program" }
+    Menu main = new("Main Menu") {
+        { 'h', "Hello World"},
+        { '2', "Goto Second Menu"},
+        { 'q', "Quit Program"},
     };
     try {
-        char selection = main.DisplayMenu(true);
-        if (selection.Equals('h')) {
-            Console.Clear();
-            Console.WriteLine("Hello World");
-            Console.WriteLine();
-            Console.Write("Press any key to continue ... ");
-            Console.ReadKey();
-        } else if (selection.Equals('q')) {
+        char Selection = main.DisplayMenu(true);
+        if (Selection.Equals('h')) {
+            System.Console.Clear();
+            System.Console.WriteLine("Hello World!");
+            System.Console.WriteLine();
+            System.Console.Write("Press Any Key to Continue ...");
+            System.Console.ReadKey();
+        } else if (Selection.Equals('2')) {
+            curMenu = 2;
+        } else if (Selection.Equals('q')) {
             curMenu = 0;
         }
     } catch (InvalidMenuSelectionException) {
-        Console.Clear();
-        Console.WriteLine("Invalid selection. Please try again.");
-        Console.WriteLine();
-        Console.Write("Press any key to continue ... ");
-        Console.ReadKey();
+        System.Console.Clear();
+        System.Console.WriteLine("You have made an invalid selection!");
+        System.Console.WriteLine("Please make a selection from the options shown.");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Press Any Key to Continue ... ");
+        System.Console.ReadKey();
+    }
+}
+
+void SecondMenu() {
+    Menu main = new("Second Menu") {
+        {'d', "Display Message"},
+        {'b', "Go Back to Main Menu"},
+        {'q', "Quit Program"},
+    };
+    try {
+        char Selection = main.DisplayMenu(true);
+        if (Selection.Equals('d')) {
+            System.Console.Clear();
+            System.Console.WriteLine("Hello awesome person!!!");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press Any Key to Continue ... ");
+            Console.ReadKey();
+        } else if (Selection.Equals('b')) {
+            curMenu = 1;
+        } else if (Selection.Equals('q')) {
+            curMenu = 0;
+        }
+    } catch (InvalidMenuSelectionException) {
+        System.Console.Clear();
+        System.Console.WriteLine("You have made an invalid selection!");
+        System.Console.WriteLine("Please make a selection from the options shown.");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Press Any Key to Continue ... ");
+        System.Console.ReadKey();
     }
 }
 ```
 
 This example demonstrates how to use the `Menu` class to create a main menu with two options: "Hello World" and "Quit Program". The `MainMenu` method is called in a loop, which displays the menu and waits for the user to make a selection. If the user selects "Hello World", a message is displayed and the user is prompted to press a key to continue. If the user selects "Quit Program", the loop is exited and the program terminates. If the user selects an invalid menu item, an error message is displayed and the user is prompted to press a key to continue.
+
+1.  The first line of the code imports the MenuSystem namespace, which contains the Menu class and related exceptions.
+2.  The variable running is initialized to true and curMenu is initialized to 1.
+3.  The while loop runs until running is set to false.
+4.  Inside the loop, a switch statement is used to determine which menu to display based on the value of curMenu.
+5.  When curMenu is equal to 1, the MainMenu function is called, which displays the main menu and handles user input.
+6.  When curMenu is equal to 2, the SecondMenu function is called, which displays the second menu and handles user input.
+7.  When curMenu is equal to 0, the loop exits and the console is cleared.
+8.  The MainMenu function creates a new Menu object with the title "Main Menu" and adds three menu items: "Hello World", "Goto Second Menu", and "Quit Program". The DisplayMenu method is then called on the Menu object, which displays the menu and handles user input. If the user selects "Hello World", a message is displayed on the console. If the user selects "Goto Second Menu", curMenu is set to 2. If the user selects "Quit Program", curMenu is set to 0. If the user enters an invalid selection, an error message is displayed on the console.
+9.  The SecondMenu function creates a new Menu object with the title "Second Menu" and adds three menu items: "Display Message", "Go Back to Main Menu", and "Quit Program". The DisplayMenu method is then called on the Menu object, which displays the menu and handles user input. If the user selects "Display Message", a message is displayed on the console. If the user selects "Go Back to Main Menu", curMenu is set to 1. If the user selects "Quit Program", curMenu is set to 0. If the user enters an invalid selection, an error message is displayed on the console.
+10.  Overall, the code allows the user to navigate through different menus and select options using the Menu class. When the user selects an option, the corresponding action is performed, and the user is prompted to continue or return to the main menu. The use of exceptions ensures that the user is notified when an invalid selection is made.
